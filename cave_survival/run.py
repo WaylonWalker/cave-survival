@@ -17,8 +17,8 @@ def run():
     image_rect = image1.get_rect()
 
     # Set the initial position of the image
-    image_rect.x = 0
-    image_rect.y = 0
+    image_rect.x = 350
+    image_rect.y = 250
     movement_speed = 0.5
 
     # Set the animation speed
@@ -52,16 +52,16 @@ def run():
 
         # Animate the image if the player is moving
         if (
-            pressed[pygame.K_w] or
-            pressed[pygame.K_a] or
-            pressed[pygame.K_s] or
-            pressed[pygame.K_d]
+            pressed[pygame.K_w]
+            or pressed[pygame.K_a]
+            or pressed[pygame.K_s]
+            or pressed[pygame.K_d]
         ):
             animation_frame += animation_speed
             if animation_frame >= 2:
                 animation_frame = 0
 
-            image_rect.x += movement_speed + 1
+            image_rect.x += movement_speed
 
             # Draw the image on the screen
             screen.fill((0, 0, 0))
