@@ -28,6 +28,8 @@ dependencies = [
   "pygame",
   "typer",
   "rich",
+  "pydantic",
+  'noise',
 ]
 dynamic = ["version"]
 
