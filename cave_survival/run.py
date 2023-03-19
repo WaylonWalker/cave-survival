@@ -1,2 +1,6 @@
+from cave_survival.game import Game
+
+
 def run():
-    from cave_survival import underground
+    game = Game()
+    game.run()

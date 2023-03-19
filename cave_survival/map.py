@@ -4,14 +4,9 @@ from noise import snoise2
 from PIL import Image, ImageFilter
 from rich.console import Console
 
+from cave_survival.config import config
+
 console = Console()
-
-# Generate the map using perlin noise
-
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GREY = (128, 128, 128)
-RED = (255, 128, 128)
 
 
 class Point(pydantic.BaseModel):
@@ -28,10 +23,8 @@ class Map:
         self.scale = 0.14  # Determines the "smoothness" of the terrain
         self.offset = Point(x=0, y=0)
         self.last_offset = self.offset
-        # self.width = int(screen_width / self.resolution)
-        # self.height = int(screen_height / self.resolution)
-        self.screen_width = 800
-        self.screen_height = 600
+        self.screen_width = config.screen_width
+        self.screen_height = config.screen_height
         self.octaves = 2  # Number of layers of noise to combine
         self.persistence = 0.05  # Amplitude of each octave
         self.lacunarity = 1.0  # Frequency of each octave
@@ -40,17 +33,6 @@ class Map:
 
     def refresh_surf(self):
         self.surf = pygame.Surface((self.screen_width, self.screen_height))
-        # self.surf.blit(self.grass, (0, 0))
-
-        # self.noise_map = self.generate_noise_map()
-
-    # def generate_noise_map(self):
-
-    #     noise_map = [
-    #         [self.get_noise(x, y) for x in range(self.width)]
-    #         for y in range(self.height)
-    #     ]
-    #     return noise_map
 
     def get_noise(self, x, y):
         value = snoise2(
@@ -64,8 +46,6 @@ class Map:
         return value
 
     def draw(self, screen):
-        # if self.last_offset != self.offset:
-        #     self.last_offset = self.offset
         screen.blit(
             pygame.transform.scale(self.surf, (self.screen_width, self.screen_height)),
             (0, 0),
@@ -84,14 +64,12 @@ class Map:
                 if not self.point_check_collision(x, y):
                     pygame.draw.rect(
                         self.surf,
-                        WHITE,
+                        config.WHITE,
                         (
                             x,
                             y,
                             1,
                             1,
-                            # self.resolution,
-                            # self.resolution,
                         ),
                     )
         pygame.image.save(self.surf, "map.png")
