@@ -15,7 +15,8 @@ class Point(pydantic.BaseModel):
 
 
 class Map:
-    def __init__(self):
+    def __init__(self, game):
+        self.game = game
         self.grass = pygame.image.load("grass.webp").convert_alpha()
         self.rock = pygame.image.load("rock.jpg").convert_alpha()
         self.dirt = pygame.image.load("dirt.jpg").convert_alpha()
@@ -45,8 +46,8 @@ class Map:
         value = (value + 1) / 2 * 255
         return value
 
-    def draw(self, screen):
-        screen.blit(
+    def draw(self):
+        self.game.screen.blit(
             pygame.transform.scale(self.surf, (self.screen_width, self.screen_height)),
             (0, 0),
         )

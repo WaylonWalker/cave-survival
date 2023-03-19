@@ -4,6 +4,8 @@ import pydantic
 class Config(pydantic.BaseModel):
     screen_width: int = 800
     screen_height: int = 600
+    fps: int = 60
+    day_length: int = 60 * 1000
 
     BLACK: tuple[int] = (0, 0, 0)
     WHITE: tuple[int] = (255, 255, 255)
