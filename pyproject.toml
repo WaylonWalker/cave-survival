@@ -26,6 +26,7 @@ classifiers = [
 dependencies = [
   "debugpy",
   "pygame",
+  "pyopengl",
   "typer",
   "rich",
   "pydantic",
